@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -349,7 +348,7 @@ header{height:60px!important}
 .block{border-radius:24px!important;padding:24px 20px!important;box-shadow:0 4px 24px rgba(100,75,55,.08)!important;transition:box-shadow .2s!important}
 .block:hover{box-shadow:0 8px 32px rgba(100,75,55,.13)!important}
 .btinput{font-family:‘Tenor Sans’,serif!important;font-size:1.3rem!important}
-.bbinput{font-family:‘Nunito’,sans-serif!important;font-size:.9rem!important;line-height:1.75!important}
+.bbinput{font-family:‘Nunito’,sans-serif!important;font-size:.9rem!important;line-height:1.75!important;overflow:hidden;resize:none}
 .twrap{border-radius:18px!important;overflow:hidden!important}
 table{font-family:‘Nunito’,sans-serif!important}
 th{font-family:‘Nunito’,sans-serif!important;font-weight:700!important;font-size:.65rem!important;letter-spacing:.12em!important}
@@ -381,8 +380,6 @@ th{font-family:‘Nunito’,sans-serif!important;font-weight:700!important;font-
 .mopt{border-radius:18px!important}
 .moptname{font-family:‘Nunito’,sans-serif!important;font-weight:700!important}
 .atag{border-radius:100px!important;font-family:‘Nunito’,sans-serif!important;font-weight:600!important}
-.bbinput{overflow:hidden;resize:none}
-
 @media(max-width:640px){
 #login-screen{align-items:flex-end!important;padding:0!important}
 .lcard{border-radius:28px 28px 0 0!important;padding:30px 20px 44px!important;width:100%!important;max-width:100%!important}
@@ -1064,7 +1061,10 @@ function buildText(b, tab) {
   const titleEl = document.createElement('input');
   titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
   titleEl.readOnly = !canEdit();
-  if (canEdit()) titleEl.oninput = () => { b.title = titleEl.value; schedSave(b, tab); };
+  if (canEdit()) {
+    titleEl.oninput = () => { b.title = titleEl.value; };
+    titleEl.onblur  = () => saveBlock(b, tab);
+  }
   wrap.appendChild(titleEl);
 
   if (canEdit()) {
@@ -1074,12 +1074,12 @@ function buildText(b, tab) {
     ta.style.overflow = 'hidden';
     ta.style.resize = 'none';
     ta.oninput = () => {
-      // Resize silently — no rerender, no cursor jump
       ta.style.height = 'auto';
       ta.style.height = ta.scrollHeight + 'px';
       b.body = ta.value;
-      schedSave(b, tab);  // debounced save, no rerender
+      // No save on every keystroke — save on blur only
     };
+    ta.onblur = () => saveBlock(b, tab);
     wrap.appendChild(ta);
     setTimeout(() => {
       ta.style.height = 'auto';
@@ -1124,7 +1124,8 @@ function buildTable(b, tab) {
   const headRow = document.createElement('tr');
   b.cols.forEach((col, ci) => {
     const th = document.createElement('th'); th.textContent = col;
-    if (canEdit()) { th.contentEditable = 'true'; th.oninput = () => { b.cols[ci] = th.textContent; schedSave(b, tab); }; }
+    if (canEdit()) { th.contentEditable = 'true'; th.oninput = () => { b.cols[ci] = th.textContent; };
+    th.onblur  = () => saveBlock(b, tab); }
     headRow.appendChild(th);
   });
   thead.appendChild(headRow); table.appendChild(thead);
@@ -1136,7 +1137,8 @@ function buildTable(b, tab) {
       const td = document.createElement('td');
       if (canEdit()) {
         td.textContent = cell; td.contentEditable = 'true';
-        td.oninput = () => { b.rows[ri][ci] = td.innerText.trim(); schedSave(b, tab); };
+        td.oninput = () => { b.rows[ri][ci] = td.innerText.trim(); };
+      td.onblur  = () => saveBlock(b, tab);
       } else {
         td.appendChild(renderCellContent(cell));
       }
@@ -1182,7 +1184,10 @@ function buildCheckItem(item, b, tab) {
 
   const label = document.createElement('input'); label.type = 'text'; label.className = 'clabel'; label.value = item.text;
   label.readOnly = !canEdit();
-  if (canEdit()) label.oninput = () => { item.text = label.value; schedSave(b, tab); };
+  if (canEdit()) {
+    label.oninput = () => { item.text = label.value; };
+    label.onblur  = () => saveBlock(b, tab);
+  }
 
   row.appendChild(cb); row.appendChild(label);
   if (item.assignee) {
