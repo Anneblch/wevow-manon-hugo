@@ -131,10 +131,10 @@ main{max-width:820px;margin:0 auto;padding:32px 20px 80px}
 .cbtn{width:30px;height:30px;border-radius:8px;border:1px solid var(–beige-dark);background:var(–white);cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .cbtn:hover{background:var(–rose-light);border-color:var(–rose-deep)}
 .cbtn.del:hover{background:#fde8e8;border-color:#e08080}
-.btinput{font-family:‘Tenor Sans’,serif;font-size:1.3rem;font-weight:400;color:var(–text);border:none;background:transparent;outline:none;width:100%;padding:2px 4px;border-radius:6px;margin-bottom:10px;transition:background .2s}
+.btinput{font-family:‘Tenor Sans’,serif;font-size:1.35rem;letter-spacing:.01em;font-weight:400;color:var(–text);border:none;background:transparent;outline:none;width:100%;padding:2px 4px;border-radius:6px;margin-bottom:10px;transition:background .2s}
 .btinput:focus{background:rgba(232,196,196,.1)}
 .btinput[readonly]{cursor:default}
-.bbinput{font-family:‘Nunito’,sans-serif;font-size:.88rem;color:var(–text-mid);line-height:1.75;border:none;background:transparent;outline:none;width:100%;resize:none;overflow:hidden;border-radius:6px;padding:3px 4px;transition:background .2s;min-height:40px}
+.bbinput{font-family:‘Nunito’,sans-serif;font-size:.9rem;color:var(–text-mid);line-height:1.75;border:none;background:transparent;outline:none;width:100%;resize:none;overflow:hidden;border-radius:6px;padding:3px 4px;transition:background .2s;min-height:40px}
 .bbinput:focus{background:rgba(242,234,211,.2)}
 @media(max-width:640px){.block{padding:18px 15px;border-radius:20px;margin-bottom:11px}.btinput{font-size:1.1rem}}
 @media(min-width:900px){.block{padding:28px 26px}.btinput{font-size:1.4rem}}
@@ -158,8 +158,8 @@ main{max-width:820px;margin:0 auto;padding:32px 20px 80px}
 .stbtn:hover{border-color:var(–sage);color:var(–sage-dark);background:rgba(139,158,138,.08);border-style:solid}
 .twrap{overflow-x:auto;border-radius:16px;border:1px solid var(–beige-dark);overflow:hidden}
 table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:300px;font-family:‘Nunito’,sans-serif}
-th{background:linear-gradient(135deg,var(–rose-light),var(–beige));padding:10px 14px;font-weight:700;font-size:.61rem;letter-spacing:.14em;text-transform:uppercase;color:var(–text-mid);border-bottom:1px solid var(–beige-dark);text-align:left}
-td{padding:10px 14px;border-bottom:1px solid rgba(224,211,180,.22);color:var(–text-mid);vertical-align:top}
+th{background:linear-gradient(135deg,var(–rose-light),var(–beige));padding:10px 14px;font-family:‘Nunito’,sans-serif;font-weight:700;font-size:.61rem;letter-spacing:.14em;text-transform:uppercase;color:var(–text-mid);border-bottom:1px solid var(–beige-dark);text-align:left}
+td{padding:10px 14px;border-bottom:1px solid rgba(224,211,180,.22);color:var(–text-mid);vertical-align:top;font-family:‘Nunito’,sans-serif;font-size:.84rem;line-height:1.55}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(247,234,234,.15)}
 td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outline:none;background:rgba(242,234,211,.3)}
@@ -173,6 +173,7 @@ td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outlin
 /* ── CHECKLIST ────────────────────────────────────── */
 .chkitem{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(224,211,180,.2)}
 .chkitem:last-child{border-bottom:none}
+.clabel{font-family:‘Nunito’,sans-serif;font-size:.88rem;color:var(–text);border:none;background:transparent;outline:none;flex:1;line-height:1.5;padding:1px 0}
 .chkitem.done .clabel{color:var(–text-light);text-decoration:line-through}
 .ccb{width:19px;height:19px;border-radius:50%;border:2px solid var(–rose-deep);appearance:none;-webkit-appearance:none;cursor:pointer;flex-shrink:0;margin-top:2px;transition:all .2s;position:relative}
 .ccb:checked{background:var(–rose-deep)}
@@ -295,7 +296,8 @@ td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outlin
 /* ── UTILITY ──────────────────────────────────────── */
 .mt8{margin-top:8px}
 .mt12{margin-top:12px}
-</style>
+
+td[contenteditable]{font-family:‘Nunito’,sans-serif;font-size:.84rem;color:var(–text);}</style>
 
 </head>
 <body>
