@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -21,6 +19,7 @@
   --sh2:0 12px 40px rgba(100,75,55,.14);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+button{color:inherit;font-family:inherit;-webkit-appearance:none;appearance:none}
 body{font-family:'Nunito',sans-serif;font-size:15px;line-height:1.65;color:var(--text-mid);background:var(--cream);min-height:100dvh;overscroll-behavior:none;background-image:radial-gradient(ellipse at 8% 10%,rgba(232,196,196,.2) 0%,transparent 45%),radial-gradient(ellipse at 92% 80%,rgba(181,196,177,.15) 0%,transparent 40%)}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--beige-dark);border-radius:5px}
 
@@ -70,7 +69,7 @@ border:none;background:none;cursor:pointer;
 display:flex;align-items:center;gap:6px;
 font-family:‘Nunito’,sans-serif;font-size:.68rem;font-weight:700;
 letter-spacing:.16em;text-transform:uppercase;
-color:var(–text-light);position:relative;transition:color .2s;white-space:nowrap;
+color:var(–text-light);position:relative;transition:color .2s;white-space:nowrap;-webkit-appearance:none;
 }
 .tbtn::after{content:’’;position:absolute;bottom:0;left:16px;right:16px;height:2.5px;border-radius:2px 2px 0 0;background:linear-gradient(90deg,var(–rose-deep),var(–sage));transform:scaleX(0);transition:transform .25s}
 .tbtn.active{color:var(–text)}
@@ -299,8 +298,9 @@ td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outlin
 .mt12{margin-top:12px}
 
 td[contenteditable]{font-family:‘Nunito’,sans-serif;font-size:.84rem;color:var(–text);}
-input.btinput[readonly]{font-family:‘Tenor Sans’,serif !important;color:var(–text) !important}
-textarea.bbinput{font-family:‘Nunito’,sans-serif !important}</style>
+input.btinput[readonly]{font-family:‘Tenor Sans’,serif !important;color:var(–text) !important;-webkit-appearance:none;appearance:none}
+textarea.bbinput{font-family:‘Nunito’,sans-serif !important}
+.btinput-ro{font-family:‘Tenor Sans’,serif;font-size:1.35rem;letter-spacing:.01em;font-weight:400;color:var(–text);padding:2px 4px;margin-bottom:10px;line-height:1.3;word-break:break-word}</style>
 
 </head>
 <body>
@@ -954,14 +954,18 @@ function rerenderBlock(id, tab) {
 function buildText(b, tab) {
   const wrap = document.createElement('div');
 
-  const titleEl = document.createElement('input');
-  titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
-  titleEl.readOnly = !canEdit();
   if (canEdit()) {
+    const titleEl = document.createElement('input');
+    titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
     titleEl.oninput = () => { b.title = titleEl.value; };
     titleEl.onblur  = () => saveBlock(b, tab);
+    wrap.appendChild(titleEl);
+  } else {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'btinput btinput-ro';
+    titleEl.textContent = b.title;
+    wrap.appendChild(titleEl);
   }
-  wrap.appendChild(titleEl);
 
   if (canEdit()) {
     const ta = document.createElement('textarea');
@@ -994,11 +998,18 @@ function buildText(b, tab) {
 function buildTable(b, tab) {
   const wrap = document.createElement('div');
 
-  const titleEl = document.createElement('input');
-  titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
-  titleEl.readOnly = !canEdit();
-  if (canEdit()) titleEl.oninput = () => { b.title = titleEl.value; };
-  wrap.appendChild(titleEl);
+  if (canEdit()) {
+    const titleEl = document.createElement('input');
+    titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
+    titleEl.oninput = () => { b.title = titleEl.value; };
+    titleEl.onblur  = () => saveBlock(b, tab);
+    wrap.appendChild(titleEl);
+  } else {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'btinput btinput-ro';
+    titleEl.textContent = b.title;
+    wrap.appendChild(titleEl);
+  }
 
   if (canEdit()) {
     const bar = document.createElement('div'); bar.className = 'tacts';
@@ -1060,11 +1071,18 @@ function buildTable(b, tab) {
 function buildChecklist(b, tab) {
   const wrap = document.createElement('div');
 
-  const titleEl = document.createElement('input');
-  titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
-  titleEl.readOnly = !canEdit();
-  if (canEdit()) titleEl.oninput = () => { b.title = titleEl.value; };
-  wrap.appendChild(titleEl);
+  if (canEdit()) {
+    const titleEl = document.createElement('input');
+    titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
+    titleEl.oninput = () => { b.title = titleEl.value; };
+    titleEl.onblur  = () => saveBlock(b, tab);
+    wrap.appendChild(titleEl);
+  } else {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'btinput btinput-ro';
+    titleEl.textContent = b.title;
+    wrap.appendChild(titleEl);
+  }
 
   const list = document.createElement('div');
   (b.items || []).forEach(item => list.appendChild(buildCheckItem(item, b, tab)));
@@ -1121,11 +1139,18 @@ function buildCheckItem(item, b, tab) {
 function buildImage(b, tab) {
   const wrap = document.createElement('div');
 
-  const titleEl = document.createElement('input');
-  titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
-  titleEl.readOnly = !canEdit();
-  if (canEdit()) titleEl.oninput = () => { b.title = titleEl.value; };
-  wrap.appendChild(titleEl);
+  if (canEdit()) {
+    const titleEl = document.createElement('input');
+    titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
+    titleEl.oninput = () => { b.title = titleEl.value; };
+    titleEl.onblur  = () => saveBlock(b, tab);
+    wrap.appendChild(titleEl);
+  } else {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'btinput btinput-ro';
+    titleEl.textContent = b.title;
+    wrap.appendChild(titleEl);
+  }
 
   const fileInput = document.createElement('input');
   fileInput.type = 'file'; fileInput.accept = 'image/*'; fileInput.multiple = true; fileInput.className = 'hidden';
@@ -1171,10 +1196,17 @@ function buildImage(b, tab) {
 // ── Kit d'urgence ──────────────────────────────────────────────────────
 function buildKit(b) {
   const wrap = document.createElement('div');
-  const titleEl = document.createElement('input');
-  titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
-  titleEl.readOnly = !canEdit();
-  wrap.appendChild(titleEl);
+  if (canEdit()) {
+    const titleEl = document.createElement('input');
+    titleEl.className = 'btinput'; titleEl.type = 'text'; titleEl.value = b.title;
+    titleEl.onblur = () => saveBlock(b, 'jourj');
+    wrap.appendChild(titleEl);
+  } else {
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'btinput btinput-ro';
+    titleDiv.textContent = b.title;
+    wrap.appendChild(titleDiv);
+  }
   const note = document.createElement('p');
   note.style.cssText = 'font-size:.76rem;color:var(--text-light);margin-bottom:10px';
   note.textContent = "Cochez ce que vous avez dans le kit d'urgence 👜";
