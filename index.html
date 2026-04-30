@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -131,10 +132,11 @@ main{max-width:820px;margin:0 auto;padding:32px 20px 80px}
 .cbtn{width:30px;height:30px;border-radius:8px;border:1px solid var(–beige-dark);background:var(–white);cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .cbtn:hover{background:var(–rose-light);border-color:var(–rose-deep)}
 .cbtn.del:hover{background:#fde8e8;border-color:#e08080}
-.btinput{font-family:‘Tenor Sans’,serif;font-size:1.35rem;letter-spacing:.01em;font-weight:400;color:var(–text);border:none;background:transparent;outline:none;width:100%;padding:2px 4px;border-radius:6px;margin-bottom:10px;transition:background .2s}
+.btinput{font-family:‘Tenor Sans’,serif !important;font-size:1.35rem;letter-spacing:.01em;font-weight:400;color:var(–text);border:none;background:transparent;outline:none;width:100%;padding:2px 4px;border-radius:6px;margin-bottom:10px;transition:background .2s}
 .btinput:focus{background:rgba(232,196,196,.1)}
 .btinput[readonly]{cursor:default}
-.bbinput{font-family:‘Nunito’,sans-serif;font-size:.9rem;color:var(–text-mid);line-height:1.75;border:none;background:transparent;outline:none;width:100%;resize:none;overflow:hidden;border-radius:6px;padding:3px 4px;transition:background .2s;min-height:40px}
+.bbinput{font-family:‘Nunito’,sans-serif !important;font-size:.9rem;color:var(–text-mid);line-height:1.75;border:none;background:transparent;outline:none;width:100%;resize:none;overflow:hidden;border-radius:6px;padding:3px 4px;transition:background .2s;min-height:40px}
+.bbinput *{font-family:‘Nunito’,sans-serif !important;font-size:.9rem;color:inherit;line-height:1.75}
 .bbinput:focus{background:rgba(242,234,211,.2)}
 @media(max-width:640px){.block{padding:18px 15px;border-radius:20px;margin-bottom:11px}.btinput{font-size:1.1rem}}
 @media(min-width:900px){.block{padding:28px 26px}.btinput{font-size:1.4rem}}
@@ -178,7 +180,6 @@ td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outlin
 .ccb{width:19px;height:19px;border-radius:50%;border:2px solid var(–rose-deep);appearance:none;-webkit-appearance:none;cursor:pointer;flex-shrink:0;margin-top:2px;transition:all .2s;position:relative}
 .ccb:checked{background:var(–rose-deep)}
 .ccb:checked::after{content:‘✓’;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;font-size:10px;font-weight:700}
-.clabel{font-family:‘Nunito’,sans-serif;font-size:.88rem;color:var(–text);border:none;background:transparent;outline:none;flex:1;line-height:1.5;padding:1px 0}
 .assign-wrap{flex-shrink:0}
 .assign-input{border:none;background:transparent;outline:none;font-family:‘Nunito’,sans-serif;font-size:.63rem;font-weight:700;color:var(–text-light);letter-spacing:.04em;padding:2px 9px;border-radius:100px;border:1px dashed rgba(224,211,180,.7);width:100px;transition:all .2s}
 .assign-input:focus{border-style:solid;border-color:var(–sage);color:var(–sage-dark);background:rgba(139,158,138,.07);width:120px}
@@ -297,7 +298,9 @@ td[contenteditable=“true”]:focus,th[contenteditable=“true”]:focus{outlin
 .mt8{margin-top:8px}
 .mt12{margin-top:12px}
 
-td[contenteditable]{font-family:‘Nunito’,sans-serif;font-size:.84rem;color:var(–text);}</style>
+td[contenteditable]{font-family:‘Nunito’,sans-serif;font-size:.84rem;color:var(–text);}
+input.btinput[readonly]{font-family:‘Tenor Sans’,serif !important;color:var(–text) !important}
+textarea.bbinput{font-family:‘Nunito’,sans-serif !important}</style>
 
 </head>
 <body>
